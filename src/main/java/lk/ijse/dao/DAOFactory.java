@@ -13,15 +13,17 @@ public class DAOFactory {
     }
 
     public enum DAOTypes {
-        STUDENT,USER
+        USER,PROGRAM,STUDENT
     }
 
     public SuperDAO getDAO(DAOTypes types){
         switch (types) {
-            case STUDENT:
-                return new StudentDAOImpl();
             case USER:
                 return new UserDAOImpl();
+            case PROGRAM:
+                return new ProgramDAOImpl();
+            case STUDENT:
+                return new StudentDAOImpl();
             default:
                 return null;
         }

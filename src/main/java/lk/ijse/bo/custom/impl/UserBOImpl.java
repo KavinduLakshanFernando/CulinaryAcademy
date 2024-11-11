@@ -6,14 +6,16 @@ import lk.ijse.dao.custom.UserDAO;
 import lk.ijse.dto.UserDTO;
 import lk.ijse.entity.User;
 
+import java.sql.SQLException;
+
 
 public class UserBOImpl implements UserBO {
 
     UserDAO userDAO = (UserDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.USER);
 
     @Override
-    public boolean saveUser(UserDTO e) {
-        return userDAO.saveUser(new User(e.getUserId(),e.getPassword(),e.getRole(),e.getUsername()));
+    public boolean saveUser(UserDTO e) throws SQLException, ClassNotFoundException {
+        return userDAO.save(new User(e.getUserId(),e.getPassword(),e.getRole(),e.getUsername()));
     }
 
     @Override

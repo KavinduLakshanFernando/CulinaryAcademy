@@ -22,7 +22,7 @@ public class LoginPageController {
     @FXML
     private AnchorPane rootNode;
 
-    String liveUserRole = "";
+    static String liveUserRole = "";
 
     @FXML
     private TextField txtPassword;
@@ -50,26 +50,28 @@ public class LoginPageController {
                     if (userDto.getRole().equals("admin")) {
                         System.out.println("he is admin");
                         liveUserRole = "admin";
+                        loadDashBoard((Stage) rootNode.getScene().getWindow());
                     } else {
-                        liveUserRole = "user";
-                        System.out.println("he is user");
+                        liveUserRole = "admissions coordinator";
+                        System.out.println("he is admissions coordinator");
+                        loadDashBoard((Stage) rootNode.getScene().getWindow());
                     }
-                    loadDashBoard();
                 } else {
                     new Alert(Alert.AlertType.ERROR, "Invalid password").show();
                 }
             }
         }
     }
-        void loadDashBoard() throws IOException {
-            FXMLLoader customerLoader = new FXMLLoader(getClass().getResource("/view/MainDashBoard.fxml"));
+
+    void loadDashBoard(Stage stage) throws IOException {
+            FXMLLoader customerLoader = new FXMLLoader(getClass().getResource("/view/MainDashboard.fxml"));
             Parent customerRoot = customerLoader.load();
             rootNode.getChildren().clear();
             rootNode.getChildren().add(customerRoot);
 
-            Stage stage = (Stage) rootNode.getScene().getWindow();
+            stage = (Stage) rootNode.getScene().getWindow();
             stage.setTitle("Dashboard");
-        }
+    }
 
     @FXML
     void regFormOnAction(ActionEvent event) throws IOException {

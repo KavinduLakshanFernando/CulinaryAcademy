@@ -5,21 +5,10 @@ import lk.ijse.dao.custom.UserDAO;
 import lk.ijse.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
 
 public class UserDAOImpl implements UserDAO {
 
-    @Override
-    public boolean saveUser(User user) {
-
-        System.out.println(user);
-        Session session = SessionFactoryConfiguration.getInstance().getSession();
-        Transaction transaction = session.beginTransaction();
-
-        session.save(user);
-        transaction.commit();
-        session.close();
-        return true;
-    }
 
     @Override
     public boolean haveAdmin() {
@@ -54,4 +43,34 @@ public class UserDAOImpl implements UserDAO {
 
         return user;
     }
+
+    @Override
+    public boolean save(User user) {
+        Session session = SessionFactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        session.save(user);
+        transaction.commit();
+        session.close();
+        return true;
     }
+
+    @Override
+    public boolean delete(String pid) {
+        Session session = SessionFactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        NativeQuery query = session.createNativeQuery("delete from Program where p_id = ?1");
+        query.setParameter(1, pid);
+        query.executeUpdate();
+
+        transaction.commit();
+        session.close();
+        return true;
+    }
+
+    @Override
+    public boolean update(User entity) {
+        return false;
+    }
+
+}

@@ -21,4 +21,6 @@ public class StudentDTO {
     private String tel;
 
     private String regDate;
+
+    private String userId;
 }

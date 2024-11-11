@@ -2,11 +2,14 @@ package lk.ijse.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.bo.BoFactory;
+import lk.ijse.bo.custom.StudentBO;
+import lk.ijse.bo.custom.UserBO;
+import lk.ijse.dto.UserDTO;
+
+import java.sql.Date;
 
 public class ManageStudentController {
 
@@ -43,6 +46,16 @@ public class ManageStudentController {
     @FXML
     private TextField txtNumber;
 
+    static String role;
+
+//    UserBO userBO = (UserBO) BoFactory.getBoFactory().getBO(BoFactory.BOTypes.USER);
+//    StudentBO studentBO = (StudentBO) BoFactory.getBoFactory().getBO(BoFactory.BOTypes.STUDENT);
+
+
+    public void initialize() {
+        System.out.println(role);
+    }
+
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
 
@@ -50,6 +63,21 @@ public class ManageStudentController {
 
     @FXML
     void btnSaveOnAction(ActionEvent event) {
+
+//        UserDTO userDto = userBO.getdatabyRole(role);
+//
+//        String id = txtId.getText();
+//        String name = txtName.getText();
+//        String address = txtAddress.getText();
+//        String tel = txtNumber.getText();
+//        String regDate = registerDate.getValue().toString();
+//
+//        StudentDto studentDto = new StudentDto(id, name, email, tel, address, dob);
+//        boolean result = studentBo.addStudent(studentDto,userDto);
+//        if (result){
+//            getallStudent();
+//            new Alert(Alert.AlertType.CONFIRMATION, "Add Successful").show();
+//        }
     }
 
     @FXML

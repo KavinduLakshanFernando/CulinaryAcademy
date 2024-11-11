@@ -3,6 +3,8 @@ package lk.ijse.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -23,4 +25,9 @@ public class Student {
     private String tel;
 
     private String regDate;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 }

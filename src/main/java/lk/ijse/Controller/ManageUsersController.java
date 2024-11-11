@@ -49,7 +49,7 @@ public class ManageUsersController {
 
     @FXML
     void btnSaveOnAction(ActionEvent event) {
-        long id = Long.parseLong(txtUid.getText());
+        String id = String.valueOf(Long.parseLong(txtUid.getText()));
         String uName = txtUserName.getText();
         String password = txtPassword.getText();
         String role = cmbRole.getValue();
