@@ -1,5 +1,7 @@
 package lk.ijse.bo.custom.impl;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import lk.ijse.bo.custom.ProgramBO;
 import lk.ijse.dao.DAOFactory;
 import lk.ijse.dao.custom.ProgramDAO;
@@ -7,6 +9,8 @@ import lk.ijse.dto.ProgramDTO;
 import lk.ijse.entity.Program;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProgramBOImpl implements ProgramBO {
 
@@ -26,4 +30,16 @@ public class ProgramBOImpl implements ProgramBO {
     public boolean updateprogram(ProgramDTO e) {
         return programDAO.update(new Program(e.getP_id(), e.getP_name(), e.getDuration(), e.getFee()));
     }
+
+    @Override
+    public ObservableList<ProgramDTO> getAllProgram() {
+        List<ProgramDTO> programDtos = new ArrayList<>();
+        List<Program> program = programDAO.getAll();
+        for (Program p : program) {
+            programDtos.add(new ProgramDTO(p.getP_id(), p.getDuration(), p.getFee(), p.getP_name()));
+        }
+        System.out.println("BOimpl awa");
+        return FXCollections.observableArrayList(programDtos);
+    }
+
 }

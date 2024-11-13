@@ -22,5 +22,4 @@ public class StudentDTO {
 
     private String regDate;
 
-    private String userId;
 }

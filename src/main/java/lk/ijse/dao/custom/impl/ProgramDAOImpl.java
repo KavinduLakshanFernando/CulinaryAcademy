@@ -9,6 +9,7 @@ import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class ProgramDAOImpl implements ProgramDAO {
 
@@ -47,5 +48,13 @@ public class ProgramDAOImpl implements ProgramDAO {
         return true;
     }
 
+    @Override
+    public List<Program> getAll() {
+        Session session = SessionFactoryConfiguration.getInstance().getSession();
+        String hql = "from Program";
+
+        System.out.println("Dao Awa");
+        return session.createQuery(hql, Program.class).list();
+    }
 
 }

@@ -5,9 +5,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.bo.BoFactory;
 import lk.ijse.bo.custom.UserBO;
+import lk.ijse.dto.ProgramDTO;
 import lk.ijse.dto.UserDTO;
+import lk.ijse.entity.User;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class ManageUsersController {
@@ -28,7 +31,7 @@ public class ManageUsersController {
     private TextField txtUid;
 
     @FXML
-    private TableView<?> tblUsers;
+    private TableView<UserDTO> tblUsers;
 
     @FXML
     private TextField txtPassword;
@@ -40,6 +43,20 @@ public class ManageUsersController {
 
     public void initialize() {
         setValuesCmb();
+        setcellvaluefactory();
+        getallUser();
+    }
+
+    private void setcellvaluefactory() {
+        ColUId.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        ColUName.setCellValueFactory(new PropertyValueFactory<>("username"));
+        ColRole.setCellValueFactory(new PropertyValueFactory<>("role"));
+
+    }
+
+    private void getallUser() {
+        ObservableList<UserDTO> users = userBO.getallUser();
+        tblUsers.setItems(users);
     }
 
     @FXML

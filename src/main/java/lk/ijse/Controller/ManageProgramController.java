@@ -1,35 +1,30 @@
 package lk.ijse.Controller;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.bo.BoFactory;
 import lk.ijse.bo.custom.ProgramBO;
 import lk.ijse.dto.ProgramDTO;
+import lk.ijse.tdm.ProgramTM;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ManageProgramController {
-
-    @FXML
-    private TableColumn<?, ?> ColAddress;
 
     @FXML
     private TableColumn<?, ?> ColDuration;
 
     @FXML
     private TableColumn<?, ?> ColFee;
-
-    @FXML
-    private TableColumn<?, ?> ColId;
-
-    @FXML
-    private TableColumn<?, ?> ColName;
-
-    @FXML
-    private TableColumn<?, ?> ColNumber;
 
     @FXML
     private TableColumn<?, ?> ColPId;
@@ -41,10 +36,7 @@ public class ManageProgramController {
     private AnchorPane rootNode;
 
     @FXML
-    private TableView<?> tblProgram;
-
-    @FXML
-    private TableView<?> tblStudent;
+    private TableView<ProgramDTO> tblProgram;
 
     @FXML
     private TextField txtDuration;
@@ -60,7 +52,22 @@ public class ManageProgramController {
 
     ProgramBO programBO = (ProgramBO) BoFactory.getBoFactory().getBO(BoFactory.BOTypes.PROGRAM);
 
-    private void initialize() {
+    public void initialize() {
+        setcellvaluefactory();
+        getallProgram();
+    }
+
+    private void setcellvaluefactory() {
+        ColPId.setCellValueFactory(new PropertyValueFactory<>("p_id"));
+        ColDuration.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        ColFee.setCellValueFactory(new PropertyValueFactory<>("fee"));
+        ColPName.setCellValueFactory(new PropertyValueFactory<>("p_name"));
+
+    }
+
+    private void getallProgram() {
+        ObservableList<ProgramDTO> programe = programBO.getAllProgram();
+        tblProgram.setItems(programe);
     }
 
 
@@ -72,6 +79,7 @@ public class ManageProgramController {
                 boolean isDeleted = programBO.deleteProgram(pid);
                 if (isDeleted) {
                     new Alert(Alert.AlertType.CONFIRMATION, "User deleted!").show();
+                    getallProgram();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -94,6 +102,7 @@ public class ManageProgramController {
                 boolean isSaved = programBO.saveprogram(programDTO);
                 if (isSaved) {
                     new Alert(Alert.AlertType.CONFIRMATION, "User saved!").show();
+                    getallProgram();
                 }
             } catch (Exception e) {
                 throw new RuntimeException(e);
@@ -101,12 +110,8 @@ public class ManageProgramController {
         }
     }
 
-
-
-
     @FXML
     void btnSearchOnAction(ActionEvent event) {
-
 
     }
 
@@ -126,6 +131,7 @@ public class ManageProgramController {
                 boolean isSaved = programBO.updateprogram(programDTO);
                 if (isSaved) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Program Updated!").show();
+                    getallProgram();
                 }
             } catch (Exception e) {
                 throw new RuntimeException(e);

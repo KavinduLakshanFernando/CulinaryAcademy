@@ -2,10 +2,13 @@ package lk.ijse.dao.custom.impl;
 
 import lk.ijse.config.SessionFactoryConfiguration;
 import lk.ijse.dao.custom.UserDAO;
+import lk.ijse.entity.Program;
 import lk.ijse.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
+
+import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
 
@@ -71,6 +74,14 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public boolean update(User entity) {
         return false;
+    }
+
+    @Override
+    public List<User> getAll() {
+        Session session = SessionFactoryConfiguration.getInstance().getSession();
+        String hql = "from User";
+
+        return session.createQuery(hql, User.class).list();
     }
 
 }

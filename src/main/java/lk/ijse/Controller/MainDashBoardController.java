@@ -35,7 +35,7 @@ public class MainDashBoardController {
 
     public void initialize() {
         checkLoggedUser();
-        System.out.println(role);
+//        System.out.println(role);
 
 
         PauseTransition delay = new PauseTransition(Duration.seconds(0.0001));

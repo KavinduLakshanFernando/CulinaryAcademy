@@ -7,6 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import lk.ijse.bo.BoFactory;
 import lk.ijse.bo.custom.StudentBO;
 import lk.ijse.bo.custom.UserBO;
+import lk.ijse.dto.StudentDTO;
 import lk.ijse.dto.UserDTO;
 
 import java.sql.Date;
@@ -48,12 +49,11 @@ public class ManageStudentController {
 
     static String role;
 
-//    UserBO userBO = (UserBO) BoFactory.getBoFactory().getBO(BoFactory.BOTypes.USER);
-//    StudentBO studentBO = (StudentBO) BoFactory.getBoFactory().getBO(BoFactory.BOTypes.STUDENT);
+StudentBO studentBO = (StudentBO) BoFactory.getBoFactory().getBO(BoFactory.BOTypes.STUDENT);
 
 
     public void initialize() {
-        System.out.println(role);
+
     }
 
     @FXML
@@ -63,21 +63,17 @@ public class ManageStudentController {
 
     @FXML
     void btnSaveOnAction(ActionEvent event) {
+        String id = txtId.getText();
+        String name = txtName.getText();
+        String address = txtAddress.getText();
+        String tel = txtNumber.getText();
+        String regDate = String.valueOf(registerDate.getValue());
 
-//        UserDTO userDto = userBO.getdatabyRole(role);
-//
-//        String id = txtId.getText();
-//        String name = txtName.getText();
-//        String address = txtAddress.getText();
-//        String tel = txtNumber.getText();
-//        String regDate = registerDate.getValue().toString();
-//
-//        StudentDto studentDto = new StudentDto(id, name, email, tel, address, dob);
-//        boolean result = studentBo.addStudent(studentDto,userDto);
-//        if (result){
-//            getallStudent();
-//            new Alert(Alert.AlertType.CONFIRMATION, "Add Successful").show();
-//        }
+        StudentDTO studentDto = new StudentDTO(id, name, address, tel, regDate);
+        boolean result = studentBO.addStudent(studentDto);
+        if (result){
+            new Alert(Alert.AlertType.CONFIRMATION, "Add Successful").show();
+        }
     }
 
     @FXML

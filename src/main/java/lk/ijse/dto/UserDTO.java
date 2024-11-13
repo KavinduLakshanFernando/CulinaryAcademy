@@ -13,4 +13,9 @@ public class UserDTO {
     private String role;
     private String username;
 
+    public UserDTO(String u_id, String u_name, String role) {
+        this.userId = u_id;
+        this.username = u_name;
+        this.role = role;
+    }
 }
