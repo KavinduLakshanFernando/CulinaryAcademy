@@ -8,9 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.bo.BoFactory;
 import lk.ijse.bo.custom.UserBO;
-import lk.ijse.dto.ProgramDTO;
 import lk.ijse.dto.UserDTO;
-import lk.ijse.entity.User;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class ManageUsersController {
@@ -93,14 +91,10 @@ public class ManageUsersController {
 
     }
 
-
-
     void setValuesCmb() {
         ObservableList<String> role = FXCollections.observableArrayList();
-
         role.add("admin");
         role.add("admissions coordinator");
-
         cmbRole.setItems(role);
     }
 

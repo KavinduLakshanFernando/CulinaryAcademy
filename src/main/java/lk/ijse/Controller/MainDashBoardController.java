@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.ijse.dto.UserDTO;
 
 import java.io.IOException;
 
@@ -31,6 +32,7 @@ public class MainDashBoardController {
     private JFXButton btnLogOut;
 
     String role = LoginPageController.liveUserRole;
+    UserDTO userDTO = LoginPageController.getActiveUser();
 
 
     public void initialize() {
@@ -64,7 +66,7 @@ public class MainDashBoardController {
 
 
     void checkLoggedUser() {
-        if (role.equals("admissions coordinator")){
+        if (userDTO.getRole().equals("admissions coordinator")){
             btnUser.setVisible(false);
             btnProgram.setVisible(false);
         }

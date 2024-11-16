@@ -32,6 +32,8 @@ public class LoginPageController {
 
     UserDAO userDAO = (UserDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.USER);
     UserBO userbo = (UserBO) BoFactory.getBoFactory().getBO(BoFactory.BOTypes.USER);
+
+    static UserDTO activeUser;
     @FXML
     void LoginFormOnAction(ActionEvent event) throws IOException {
         String id = txtPassword.getText();
@@ -49,10 +51,12 @@ public class LoginPageController {
                 if (BCrypt.checkpw(id, userDto.getPassword())) {
                     if (userDto.getRole().equals("admin")) {
                         System.out.println("he is admin");
-                        liveUserRole = "admin";
+                        activeUser = userDto;
+//                        liveUserRole = "admin";
                         loadDashBoard((Stage) rootNode.getScene().getWindow());
                     } else {
-                        liveUserRole = "admissions coordinator";
+                        activeUser = userDto;
+//                        liveUserRole = "admissions coordinator";
                         System.out.println("he is admissions coordinator");
                         loadDashBoard((Stage) rootNode.getScene().getWindow());
                     }
@@ -86,5 +90,9 @@ public class LoginPageController {
             Stage stage = (Stage) rootNode.getScene().getWindow();
             stage.setTitle("UserForm");
         }
+    }
+
+    static UserDTO getActiveUser(){
+        return activeUser;
     }
 }

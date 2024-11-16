@@ -13,11 +13,8 @@ import lombok.*;
 public class Program {
     @Id
     private String p_id;
-
     private String p_name;
-
     private String duration;
-
     private double fee;
 
 }
