@@ -44,4 +44,9 @@ public class UserBOImpl implements UserBO {
         }
         return FXCollections.observableArrayList(userDTO);
     }
+
+    @Override
+    public boolean deleteUser(String id) {
+        return userDAO.delete(id);
+    }
 }

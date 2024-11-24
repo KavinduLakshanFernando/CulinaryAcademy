@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.bo.BoFactory;
 import lk.ijse.bo.custom.StudentBO;
@@ -86,6 +87,7 @@ StudentBO studentBO = (StudentBO) BoFactory.getBoFactory().getBO(BoFactory.BOTyp
             if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Student deleted!").show();
                 getallStudent();
+                clearfields();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -106,6 +108,7 @@ StudentBO studentBO = (StudentBO) BoFactory.getBoFactory().getBO(BoFactory.BOTyp
         if (result){
             new Alert(Alert.AlertType.CONFIRMATION, "Add Successful").show();
             getallStudent();
+            clearfields();
         }
     }
 
@@ -119,4 +122,21 @@ StudentBO studentBO = (StudentBO) BoFactory.getBoFactory().getBO(BoFactory.BOTyp
 
     }
 
+    void clearfields(){
+        txtId.setText(null);
+        txtName.setText(null);
+        txtAddress.setText(null);
+        txtNumber.setText(null);
+        registerDate.setValue(null);
+    }
+
+    public void StudenttblClicked(MouseEvent mouseEvent) {
+        StudentDTO studentDTO = tblStudent.getSelectionModel().getSelectedItem();
+        if (studentDTO != null) {
+            txtId.setText(String.valueOf(studentDTO.getId()));
+            txtName.setText(studentDTO.getName());
+            txtAddress.setText(studentDTO.getAddress());
+            txtNumber.setText(studentDTO.getTel());
+        }
+    }
 }

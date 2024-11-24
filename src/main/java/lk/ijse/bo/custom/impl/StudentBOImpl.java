@@ -47,4 +47,9 @@ public class StudentBOImpl implements StudentBO {
         System.out.println("BOimpl awa");
         return FXCollections.observableArrayList(studentDTOS);
     }
+
+    @Override
+    public Student searchStudent(String id) {
+        return studentDAO.search(id);
+    }
 }

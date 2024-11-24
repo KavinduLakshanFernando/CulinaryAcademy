@@ -8,8 +8,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.bo.BoFactory;
 import lk.ijse.bo.custom.UserBO;
+import lk.ijse.dto.ProgramDTO;
 import lk.ijse.dto.UserDTO;
 import org.mindrot.jbcrypt.BCrypt;
+
+import java.awt.event.MouseEvent;
 
 public class ManageUsersController {
 
@@ -59,7 +62,17 @@ public class ManageUsersController {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
+        String id = txtUid.getText();
 
+        try {
+            boolean isDeleted = userBO.deleteUser(id);
+            if (isDeleted) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Student deleted!").show();
+                getallUser();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -84,6 +97,7 @@ public class ManageUsersController {
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "User saved!").show();
                 initialize();
+                clearfields();
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -98,4 +112,20 @@ public class ManageUsersController {
         cmbRole.setItems(role);
     }
 
+    void clearfields(){
+        txtUid.setText(null);
+        txtPassword.setText(null);
+        txtUserName.setText(null);
+        cmbRole.setValue(null);
+    }
+
+    public void UsertblClicked(javafx.scene.input.MouseEvent mouseEvent) {
+        UserDTO userDto = tblUsers.getSelectionModel().getSelectedItem();
+        if (userDto != null) {
+            txtUid.setText(String.valueOf(userDto.getUserId()));
+            txtPassword.setText(userDto.getPassword());
+            txtUserName.setText(String.valueOf(userDto.getUsername()));
+            cmbRole.setValue(userDto.getRole());
+        }
+    }
 }

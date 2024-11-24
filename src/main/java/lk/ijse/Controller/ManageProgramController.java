@@ -8,6 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.bo.BoFactory;
 import lk.ijse.bo.custom.ProgramBO;
@@ -70,6 +71,12 @@ public class ManageProgramController {
         tblProgram.setItems(programe);
     }
 
+    void clearfields(){
+        txtPId.setText(null);
+        txtDuration.setText(null);
+        txtfee.setText(null);
+        txtPName.setText(null);
+    }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
@@ -80,6 +87,7 @@ public class ManageProgramController {
                 if (isDeleted) {
                     new Alert(Alert.AlertType.CONFIRMATION, "User deleted!").show();
                     getallProgram();
+                    clearfields();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -103,6 +111,7 @@ public class ManageProgramController {
                 if (isSaved) {
                     new Alert(Alert.AlertType.CONFIRMATION, "User saved!").show();
                     getallProgram();
+                    clearfields();
                 }
             } catch (Exception e) {
                 throw new RuntimeException(e);
@@ -132,6 +141,7 @@ public class ManageProgramController {
                 if (isSaved) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Program Updated!").show();
                     getallProgram();
+                    clearfields();
                 }
             } catch (Exception e) {
                 throw new RuntimeException(e);
@@ -140,4 +150,13 @@ public class ManageProgramController {
 
     }
 
+    public void programtblClicked(MouseEvent mouseEvent) {
+        ProgramDTO userDto = tblProgram.getSelectionModel().getSelectedItem();
+        if (userDto != null) {
+            txtPId.setText(String.valueOf(userDto.getP_id()));
+            txtDuration.setText(userDto.getDuration());
+            txtfee.setText(String.valueOf(userDto.getFee()));
+            txtPName.setText(userDto.getP_name());
+        }
+    }
 }

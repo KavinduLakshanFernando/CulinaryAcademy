@@ -7,6 +7,7 @@ import lk.ijse.entity.Student;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
+import org.hibernate.query.Query;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -47,10 +48,32 @@ public class StudentDAOImpl implements StudentDAO {
     @Override
     public List<Student> getAll() {
         Session session = SessionFactoryConfiguration.getInstance().getSession();
-        String hql = "from Student" +
-                "";
+        String hql = "from Student" + "";
 
         System.out.println("Dao Awa");
         return session.createQuery(hql, Student.class).list();
     }
+
+    @Override
+    public Student search(String id) {
+            Session session = SessionFactoryConfiguration.getInstance().getSession();
+            Student student = null;
+
+            try {
+                Query<Student> query = session.createQuery(
+                        "FROM Student s WHERE s.id = :id",
+                        Student.class
+                );
+                query.setParameter("id", id);
+                student = query.uniqueResult();
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                session.close();
+            }
+
+            return student;
+        }
+
+
 }

@@ -1,9 +1,7 @@
 package lk.ijse.bo;
 
 
-import lk.ijse.bo.custom.impl.ProgramBOImpl;
-import lk.ijse.bo.custom.impl.StudentBOImpl;
-import lk.ijse.bo.custom.impl.UserBOImpl;
+import lk.ijse.bo.custom.impl.*;
 
 public class BoFactory {
     private static BoFactory boFactory;
@@ -14,7 +12,7 @@ public class BoFactory {
     }
 
     public enum BOTypes{
-        USER,PROGRAM,STUDENT
+        USER,PROGRAM,STUDENT,REGISTRATION,PAYMENT
     }
 
 
@@ -26,7 +24,14 @@ public class BoFactory {
                 return new UserBOImpl();
             case STUDENT:
                 return new StudentBOImpl();
+            case REGISTRATION:
+                return new RegistrationBOImpl();
+            case PAYMENT:
+                return new PaymentBOImpl();
+            default:
+                return null;
+
         }
-        return null;
+
     }
 }

@@ -1,6 +1,7 @@
 package lk.ijse.dao;
 
 import lk.ijse.entity.Program;
+import lk.ijse.entity.Student;
 import lk.ijse.entity.User;
 
 import java.sql.SQLException;
@@ -16,4 +17,6 @@ public interface CrudDAO<T> extends SuperDAO {
     boolean update(T entity);
 
     List<T> getAll();
+
+    Student search(String id);
 }

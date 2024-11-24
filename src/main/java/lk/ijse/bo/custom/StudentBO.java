@@ -5,6 +5,7 @@ import lk.ijse.bo.SuperBo;
 import lk.ijse.dao.SuperDAO;
 import lk.ijse.dto.StudentDTO;
 import lk.ijse.dto.UserDTO;
+import lk.ijse.entity.Student;
 
 import java.sql.SQLException;
 
@@ -15,4 +16,6 @@ public interface StudentBO extends SuperBo {
     boolean deleteStudent(String id);
 
     ObservableList<StudentDTO> getAllStudent();
+
+    Student searchStudent(String id);
 }

@@ -42,4 +42,14 @@ public class ProgramBOImpl implements ProgramBO {
         return FXCollections.observableArrayList(programDtos);
     }
 
+    @Override
+    public List<String> getProgramNames() {
+        return programDAO.getProgramNames();
+    }
+
+    @Override
+    public Program searchByName(String name) {
+        return programDAO.searchByName(name);
+    }
+
 }

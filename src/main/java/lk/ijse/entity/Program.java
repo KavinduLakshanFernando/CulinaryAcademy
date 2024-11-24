@@ -17,4 +17,7 @@ public class Program {
     private String duration;
     private double fee;
 
+    public Program(String programId) {
+        this.p_id = programId;
+    }
 }

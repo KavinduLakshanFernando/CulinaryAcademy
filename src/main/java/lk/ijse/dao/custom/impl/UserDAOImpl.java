@@ -3,6 +3,7 @@ package lk.ijse.dao.custom.impl;
 import lk.ijse.config.SessionFactoryConfiguration;
 import lk.ijse.dao.custom.UserDAO;
 import lk.ijse.entity.Program;
+import lk.ijse.entity.Student;
 import lk.ijse.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -59,11 +60,11 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public boolean delete(String pid) {
+    public boolean delete(String id) {
         Session session = SessionFactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        NativeQuery query = session.createNativeQuery("delete from Program where p_id = ?1");
-        query.setParameter(1, pid);
+        NativeQuery query = session.createNativeQuery("delete from USer where u_id = ?1");
+        query.setParameter(1, id);
         query.executeUpdate();
 
         transaction.commit();
@@ -82,6 +83,11 @@ public class UserDAOImpl implements UserDAO {
         String hql = "from User";
 
         return session.createQuery(hql, User.class).list();
+    }
+
+    @Override
+    public Student search(String id) {
+        return null;
     }
 
 }

@@ -111,7 +111,14 @@ public class MainDashBoardController {
     }
 
     @FXML
-    void btnRegistrationOnAction(ActionEvent event) {
+    void btnRegistrationOnAction(ActionEvent event) throws IOException {
+        FXMLLoader productLoader = new FXMLLoader(getClass().getResource("/view/Register_Course.fxml"));
+        Parent productRoot = productLoader.load();
+        rootNode.getChildren().clear();
+        rootNode.getChildren().add(productRoot);
+
+        Stage stage = (Stage) rootNode.getScene().getWindow();
+        stage.setTitle("");
     }
 
     @FXML

@@ -53,7 +53,7 @@
             <Font name="System Italic" size="13.0" />
          </font>
       </JFXButton>
-      <TableView fx:id="tblProgram" layoutX="21.0" layoutY="257.0" prefHeight="281.0" prefWidth="540.0">
+      <TableView fx:id="tblProgram" layoutX="21.0" layoutY="257.0" onMouseClicked="#programtblClicked" prefHeight="281.0" prefWidth="540.0">
          <columns>
             <TableColumn fx:id="ColPId" prefWidth="75.0" text="P-ID" />
             <TableColumn fx:id="ColDuration" prefWidth="126.0" text="Duration" />

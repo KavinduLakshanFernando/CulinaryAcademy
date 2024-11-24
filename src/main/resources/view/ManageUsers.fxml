@@ -31,7 +31,7 @@
             <Font name="System Italic" size="13.0" />
          </font>
       </JFXButton>
-      <TableView fx:id="tblUsers" layoutX="25.0" layoutY="254.0" prefHeight="281.0" prefWidth="540.0">
+      <TableView fx:id="tblUsers" layoutX="25.0" layoutY="254.0" onMouseClicked="#UsertblClicked" prefHeight="281.0" prefWidth="540.0">
          <columns>
             <TableColumn fx:id="ColUId" prefWidth="121.0" text="U-ID" />
             <TableColumn fx:id="ColUName" prefWidth="223.0" text="U-Name" />
